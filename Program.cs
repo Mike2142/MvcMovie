@@ -1,4 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+
+if (builder.Environment.IsDevelopment())
+{
+    var connStr = builder.Configuration.GetConnectionString("MvcMovieContext");
+    builder.Services.AddDbContext<MvcMovieContext>(opt => opt.UseLazyLoadingProxies().UseSqlServer(connStr));
+}
+else
+{
+    builder.Services.AddDbContext<MvcMovieContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionMvcMovieContext")));
+}
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcMovie.Controllers
 {
-    public class MovieListController : Controller
+    public class HelloWorldController : Controller
     {
         // 
         // GET: /MovieList/
